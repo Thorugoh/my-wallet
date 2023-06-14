@@ -14,10 +14,12 @@ export default function App() {
   }
 
   return (
-      <>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
         <StatusBar style="auto" />
         <Routes />
-      </>
+        </PersistGate>
+      </Provider>
   );
 }
 
