@@ -1,7 +1,7 @@
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "../../../../components/Text";
-import Bell from "../../../../assets/bell.svg";
-import Person from "../../../../assets/person.svg";
+import Bell from "../../../../../assets/bell.svg";
+import Person from "../../../../../assets/person.svg";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Portfolio } from "../Portfolio";
 
