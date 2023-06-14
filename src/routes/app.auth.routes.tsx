@@ -1,10 +1,12 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Login } from '../screens/Login';
 import { SignUp } from '../screens/SignUp';
+import { SignUpSuccess, SignUpSuccessScreenProps } from '../screens/SignUpSuccess';
 
 export type AuthStackRouteParams = {
     Login: undefined;
     SignUp: undefined;
+    SignUpSuccess: SignUpSuccessScreenProps;
   };
 
 export type ScreenAuthProps<RouteName extends keyof AuthStackRouteParams> = 
@@ -14,9 +16,12 @@ const { Navigator, Screen } = createNativeStackNavigator<AuthStackRouteParams>()
 
 export function AuthRoutes(){
     return(
-        <Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
+        <Navigator initialRouteName="Login" 
+            screenOptions={{ title: "", headerBackVisible: true}}
+        >
             <Screen name="Login" component={Login} />
             <Screen name="SignUp" component={SignUp} />
+            <Screen name="SignUpSuccess" component={SignUpSuccess} />
         </Navigator>
     );
 }
