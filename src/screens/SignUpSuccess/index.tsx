@@ -26,13 +26,14 @@ export function SignUpSuccess({ navigation, route }: SignUpSuccessProps) {
   useEffect(() => {
     navigation.setOptions({
       headerTitleAlign: "center",
+      headerBackVisible: false,
       headerTitle: props => <Steps totalSteps={3} completeSteps={3} />,
     });
-  }, [navigation])
+  }, [navigation]);
 
   function goToHome() {
       dispatch(loginAction({
-        id: "some-uui",
+        id: "some-uui", 
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,

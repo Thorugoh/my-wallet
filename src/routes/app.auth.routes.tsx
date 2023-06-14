@@ -4,24 +4,22 @@ import { SignUp } from '../screens/SignUp';
 import { SignUpSuccess, SignUpSuccessScreenProps } from '../screens/SignUpSuccess';
 
 export type AuthStackRouteParams = {
-    Login: undefined;
-    SignUp: undefined;
-    SignUpSuccess: SignUpSuccessScreenProps;
-  };
+  Login: undefined;
+  SignUp: undefined;
+  SignUpSuccess: SignUpSuccessScreenProps;
+};
 
-export type ScreenAuthProps<RouteName extends keyof AuthStackRouteParams> = 
-    NativeStackScreenProps<AuthStackRouteParams, RouteName>;
-  
+export type ScreenAuthProps<RouteName extends keyof AuthStackRouteParams> =
+  NativeStackScreenProps<AuthStackRouteParams, RouteName>;
+
 const { Navigator, Screen } = createNativeStackNavigator<AuthStackRouteParams>();
 
-export function AuthRoutes(){
-    return(
-        <Navigator initialRouteName="Login" 
-            screenOptions={{ title: "", headerBackVisible: true}}
-        >
-            <Screen name="Login" component={Login} />
-            <Screen name="SignUp" component={SignUp} />
-            <Screen name="SignUpSuccess" component={SignUpSuccess} />
-        </Navigator>
-    );
+export function AuthRoutes() {
+  return (
+    <Navigator initialRouteName="Login" screenOptions={{ title: "" }} >
+      <Screen name="Login" component={Login} />
+      <Screen name="SignUp" component={SignUp} />
+      <Screen name="SignUpSuccess" component={SignUpSuccess} />
+    </Navigator>
+  );
 }

@@ -6,6 +6,7 @@ import { Text } from "../../components/Text";
 import { ScreenAuthProps } from "../../routes/app.auth.routes";
 import MaterialCommunityIcon from "@expo/vector-icons/MaterialCommunityIcons"
 
+
 import { styles } from "./styles";
 import { colors } from "../../utils/colors";
 import { Steps } from "../../components/Steps";
@@ -54,7 +55,6 @@ export function SignUp({ navigation }: SignUpProps) {
 
   useEffect(() => {
     navigation.setOptions({
-      headerBackVisible: true,
       headerTitleAlign: "center",
       headerTitle: props => <Steps totalSteps={3} completeSteps={currentStep} />,
     });
@@ -96,7 +96,7 @@ export function SignUp({ navigation }: SignUpProps) {
   function createAccount() {
     const requiredFields = ["password", "email", "firstName", "lastName"] as const;
     let hasError = false;
-    
+
     requiredFields.forEach(field => {
       if(!form?.[field]){
         hasError = true;
