@@ -30,7 +30,11 @@ export function TextInput({label, style, secureTextEntry, ...rest}: TextInputPro
         <View style={style}>
             <Text style={styles.label}>{label}</Text>
             <View style={styles.textInputContainer}>
-                <TextInputBase style={styles.textInput} {...rest} secureTextEntry={showInputValue} />
+                <TextInputBase 
+                    placeholderTextColor={colors.GREY_700} 
+                    style={styles.textInput} 
+                    {...rest} 
+                    secureTextEntry={showInputValue} />
                 {
                     secureTextEntry && 
                     <MaterialCommunityIcon 
