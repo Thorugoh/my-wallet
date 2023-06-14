@@ -16,7 +16,7 @@ export function Steps({completeSteps, totalSteps}: StepProp) {
     <View style={styles.stepContainer}>
       {
         Array.from({length: totalSteps, }).map((_, index) => {
-          return <View style={[styles.stepItem, isStepComplete(index) && styles.completeStep]} />
+          return <View key={index} style={[styles.stepItem, isStepComplete(index) && styles.completeStep]} />
         })
       }
     </View>
