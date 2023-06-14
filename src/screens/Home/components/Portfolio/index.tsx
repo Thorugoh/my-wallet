@@ -1,8 +1,8 @@
 import { TouchableOpacity, View } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Text } from "../../../../components/Text";
-import Coins from "../../../assets/coins.svg";
+import Coins from "../../../../../assets/coins.svg";
 import { styles } from "./styles";
+import { InvestmentDelta } from "../../../../components/InvestmentDelta";
 
 export function Portfolio() {
   return (
@@ -10,12 +10,8 @@ export function Portfolio() {
       <Text>Portfolio</Text>
       <View style={styles.containerBottom}>
         <Text style={styles.amount}>
-          $1,457.23
-          <Text style={styles.return}>
-            {` `}
-            <MaterialCommunityIcons name="arrow-top-right" />
-            31.82%
-          </Text>
+          $1,457.24
+          <InvestmentDelta isGain={false} amountText="31.80%" />
         </Text>
 
         <TouchableOpacity style={styles.rewardsButton}>
