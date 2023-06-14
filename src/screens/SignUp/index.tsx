@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { View } from "react-native";
+import { Alert, ScrollView, View } from "react-native";
 import { Button } from "../../components/Button";
 import { TextInput } from "../../components/Input";
 import { Text } from "../../components/Text";
@@ -21,6 +21,8 @@ type Form = {
 
 export function SignUp({ navigation }: SignUpProps) {
   const [form, setForm] = useState<Partial<Form>>();
+  const [formErrors, setFormErros] = useState<Partial<Form>>();
+
   const [termsAccepted, setTermsAccepted] = useState(false);
   
   const currentStep = useMemo(() => {
@@ -43,6 +45,13 @@ export function SignUp({ navigation }: SignUpProps) {
     })
   }
 
+  function updateFormError(form: Partial<Form>) {
+    setFormErros((currentErrors) => {
+      if (currentErrors) return { ...currentErrors, ...form }
+      return form
+    })
+  }
+
   useEffect(() => {
     navigation.setOptions({
       headerBackVisible: true,
@@ -53,18 +62,30 @@ export function SignUp({ navigation }: SignUpProps) {
   
 
   function setPassword(text: string) {
+    if(formErrors?.password){
+      updateFormError({password: ""});
+    }
     return updateForm({ password: text });
   }
 
   function setEmail(text: string) {
+    if(formErrors?.email){
+      updateFormError({email: ""});
+    }
     return updateForm({ email: text });
   }
 
   function setFirstName(text: string) {
+    if(formErrors?.firstName){
+      updateFormError({firstName: ""});
+    }
     return updateForm({ firstName: text });
   }
 
   function setLastName(text: string) {
+    if(formErrors?.lastName){
+      updateFormError({lastName: ""});
+    }
     return updateForm({ lastName: text });
   }
 
@@ -73,7 +94,29 @@ export function SignUp({ navigation }: SignUpProps) {
   }
 
   function createAccount() {
-    if(!termsAccepted) return;
+    const requiredFields = ["password", "email", "firstName", "lastName"] as const;
+    let hasError = false;
+    
+    requiredFields.forEach(field => {
+      if(!form?.[field]){
+        hasError = true;
+        updateFormError({[field]: "This field is required."})
+      }
+    });
+
+    if(form?.password && form.password.length < 8){
+      hasError = true;
+      updateFormError({password: "Your password must have at least 8 characters."});
+      return;
+    }
+
+    if(hasError) return;
+
+    if(!termsAccepted) {
+      Alert.alert("You must accept terms to proceed");
+      return;
+    };
+
     if (form?.email && form?.password && form.firstName && form.lastName) {
       navigation.navigate("SignUpSuccess", {
         user: { email: form.email, firstName: form.firstName, lastName: form.lastName }
@@ -86,17 +129,34 @@ export function SignUp({ navigation }: SignUpProps) {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>Create your account</Text>
       <View style={styles.form}>
-        <TextInput label="First Name" onChangeText={setFirstName} />
-        <TextInput label="Last Name" onChangeText={setLastName} />
-        <TextInput label="E-mail" onChangeText={setEmail} />
+        <TextInput 
+          label="First Name" 
+          onChangeText={setFirstName} 
+          errorMessage={formErrors?.firstName} 
+          hasError={!!formErrors?.firstName}
+        />
+        <TextInput 
+          label="Last Name" 
+          onChangeText={setLastName}
+          errorMessage={formErrors?.lastName} 
+          hasError={!!formErrors?.lastName} 
+        />
+        <TextInput 
+          label="E-mail" 
+          onChangeText={setEmail} 
+          hasError={!!formErrors?.email}
+          errorMessage={formErrors?.email} 
+        />
         <TextInput
           label="Password"
           placeholder="Minimum 8 characters"
           secureTextEntry
           onChangeText={setPassword}
+          hasError={!!formErrors?.password}
+          errorMessage={formErrors?.password}
         />
       </View>
       <View style={styles.termsContainer}>
@@ -114,7 +174,7 @@ export function SignUp({ navigation }: SignUpProps) {
           Login Here
         </Text>
       </Text>
-    </View>
+    </ScrollView>
   )
 }
 
