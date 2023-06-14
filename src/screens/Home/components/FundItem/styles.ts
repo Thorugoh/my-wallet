@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
     height: 140,
     justifyContent: "space-between",
     padding: 12,  
-    marginVertical: 20,
   },
   title: {
     fontSize: 12,
