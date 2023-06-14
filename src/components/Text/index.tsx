@@ -1,15 +1,15 @@
-import { StyleProp, Text as TextBase, TextStyle } from "react-native";
+import { StyleProp, Text as TextBase, TextStyle, TextProps as TextPropsBase } from "react-native";
 import { styles } from "./styles";
 
-type TextProps = {
+type TextProps = TextPropsBase & {
     style?: StyleProp<TextStyle>;
     children: React.ReactNode;
 }
 
 
-export function Text({ style, children }:TextProps){
+export function Text({ style, children, ...rest }:TextProps){
     return (
-        <TextBase style={[styles.defaultText, style]}>
+        <TextBase {...rest} style={[styles.defaultText, style]}>
             {children}
         </TextBase>
     );
