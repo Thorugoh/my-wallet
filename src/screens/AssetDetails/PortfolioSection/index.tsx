@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import FeaterIcon from "@expo/vector-icons/Feather";
+import FeatherIcon from "@expo/vector-icons/Feather";
 import { Text } from "../../../components/Text";
 import { styles } from "./styles";
 import { InvestmentDelta } from "../../../components/InvestmentDelta";
@@ -9,7 +9,7 @@ export function PortfolioSection() {
   return (
     <View>
       <View style={styles.titleContainer}>
-        <FeaterIcon name="pie-chart" size={16} style={styles.icon} />
+        <FeatherIcon name="pie-chart" size={16} style={styles.icon} />
         <Text style={styles.title}>Your Portfolio</Text>
       </View>
       <View style={[styles.row]}>

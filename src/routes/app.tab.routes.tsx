@@ -5,6 +5,8 @@ import { Header } from '../screens/Home/components/Header';
 import { Portfolio } from '../screens/Portfolio';
 import { Trade } from '../screens/Trade';
 import FontistoIcon from '@expo/vector-icons/Fontisto';
+import FeatherIcon from "@expo/vector-icons/Feather";
+
 import { colors } from '../utils/colors';
 
 export type RootTabsRouteParams = {
@@ -34,7 +36,7 @@ export function Tabs() {
       tabBarStyle: {
         height: 60,
         paddingTop: 10,
-        paddingBottom: 10,
+        paddingBottom: 15,
       }
     
     }} >
@@ -56,7 +58,7 @@ export function Tabs() {
       <Tab.Screen 
         name="Portfolio" 
         options={{
-          tabBarIcon: ({ focused }) => <FontistoIcon name='pie-chart-1' size={18} color={getColor(focused)} />,
+         tabBarIcon: ({ focused }) => <FeatherIcon name="pie-chart" size={18} color={getColor(focused)} />
         }}
         component={Portfolio} 
       />

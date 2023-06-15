@@ -12,5 +12,14 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Sora_600SemiBold",
     alignSelf: "center"
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: colors.WHITE
+  },
+  cardsContainer: {
+    flexDirection: "row",
+    gap: 20,
+    flex: 1
   }
 })

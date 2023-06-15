@@ -5,6 +5,7 @@ import { Button } from "../../components/Button";
 import { InvestmentDelta } from "../../components/InvestmentDelta";
 import { Text } from "../../components/Text";
 import { ScreenStackProps } from "../../routes/app.stack.routes";
+import { colors } from "../../utils/colors";
 import { FundBreakdown } from "./FundBreakDownSection";
 import { FundChart } from "./FundChart";
 import { InfoSection } from "./InfoSection";
@@ -40,7 +41,7 @@ export function AssetDetails({ id, navigation }: Props) {
   }, [navigation]);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.container} style={{flex: 1, backgroundColor: colors.WHITE}}>
       <View style={styles.titleContainer}>
         <FundChart />
       </View>

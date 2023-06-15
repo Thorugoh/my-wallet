@@ -82,6 +82,7 @@ export function FundChart() {
             {
               tabs.map(tab => (
                 <PeriodTab
+                  key={tab}
                   title={tab}
                   isSelected={selectedTab === tab} 
                   onPress={setSelectedTab} 
