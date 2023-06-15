@@ -1,9 +1,11 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { InvestmentDelta } from "../../../../components/InvestmentDelta";
 import { Text } from "../../../../components/Text";
 import { styles } from "./styles";
 import { LineChart } from "react-native-chart-kit";
 import { colors } from "../../../../utils/colors";
+import { useNavigation } from "@react-navigation/native";
+
 type FundItemProps = {
   title: string;
   investmentDelta: {
@@ -13,12 +15,15 @@ type FundItemProps = {
   amount: string;
   icon: JSX.Element;
 }
+
 const chartConfig = {
   color: (opacity = 1) => colors.WHITE,
   backgroundColor: colors.WHITE,
 };
 
 export function FundItem({ title, amount, investmentDelta, icon: Icon }: FundItemProps) {
+  const navigation = useNavigation();
+
   const data = {
     datasets: [
       {
@@ -29,11 +34,15 @@ export function FundItem({ title, amount, investmentDelta, icon: Icon }: FundIte
     labels: ["a", "b"]
   };
 
+  function goToDetails() {
+    navigation.navigate("AssetDetails", { id: "some-uuid" });
+  }
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={goToDetails}>
       {Icon}
       <Text style={styles.title}>{title}</Text>
-       <LineChart
+      <LineChart
         data={data}
         height={60}
         width={100}
@@ -55,12 +64,12 @@ export function FundItem({ title, amount, investmentDelta, icon: Icon }: FundIte
           style: {
             borderRadius: 8,
             padding: 10,
-            width:"100%"
+            width: "100%"
           },
         }}
         bezier
       />
-     
+
       <Text>
         <Text>{amount}</Text>{` `}
         <InvestmentDelta
@@ -68,6 +77,6 @@ export function FundItem({ title, amount, investmentDelta, icon: Icon }: FundIte
           amountText={investmentDelta.value}
         />
       </Text>
-    </View>
+    </TouchableOpacity>
   )
 }
