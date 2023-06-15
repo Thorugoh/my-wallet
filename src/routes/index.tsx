@@ -1,13 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { useAppSelector } from "../hooks";
-import { AuthRoutes } from "./app.auth.routes";
-import { AppStackRoutes } from "./app.stack.routes";
+import { AuthRoutes, AuthStackRouteParams } from "./app.auth.routes";
+import { AppStackRoutes, RootStackRouteParams } from "./app.stack.routes";
+import { RootTabsRouteParams } from "./app.tab.routes";
 
-import { RootStackRouteParams } from "./app.tab.routes";
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackRouteParams { }
+    interface RootParamList extends RootStackRouteParams, RootTabsRouteParams, AuthStackRouteParams { }
   }
 }
 
